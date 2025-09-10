@@ -21,9 +21,36 @@ require "settings/init.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
+<body class="bg-light">
 
-<h1>Det virker 🥳</h1>
+<header class="bg-primary">
+    <h1 class="poppins text-center text-white p-3">
+        🗿HabiTrak🗿
+    </h1>
+</header>
+
+<!-- Stats div -->
+<div class="m-4 bg-white rounded-4 d-flex align-items-center justify-content-center" style="height: 135px /* temp height */">
+    <p class="fs-1 poppins">Stats</p>
+</div>
+
+<!-- Task Con -->
+<div class="container-fluid">
+    <div class="row gap-5 justify-content-center">
+        <!-- Dailies -->
+        <div class="col-3 bg-white rounded-4 flex-shrink-0">
+            <h1>Din mor</h1>
+        </div>
+        <!-- Habits -->
+        <div class="col-3 bg-white rounded-4 flex-shrink-0">
+            <h1>Din mor</h1>
+        </div>
+        <!-- To-Do's -->
+        <div class="col-3 bg-white rounded-4 flex-shrink-0">
+            <h1>Din mor</h1>
+        </div>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

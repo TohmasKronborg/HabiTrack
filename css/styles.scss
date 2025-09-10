@@ -1,8 +1,13 @@
 // 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
 @import "../node_modules/bootstrap/scss/functions";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 // 2. Include any default variable overrides here
 $link-decoration: none;
+$primary: #d517bd;
+$secondary: #5c42e4;
+$info: #0fa0db;
+$light: #e7e7e8;
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../node_modules/bootstrap/scss/variables";
@@ -18,3 +23,10 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrapComponents";
 
 // 5. Du kan lave styling her...
+body{
+	font-family: "Roboto", sans-serif;
+}
+
+.poppins{
+	font-family: "Poppins", sans-serif;
+}

@@ -30,3 +30,19 @@ body{
 .poppins{
 	font-family: "Poppins", sans-serif;
 }
+
+.check-bg{
+	height: 70px;
+	width: 70px;
+	flex-shrink: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.check-box{
+	height: 45px;
+	width: 45px;
+	border: 2.5px solid black;
+	flex-shrink: 0;
+}

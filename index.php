@@ -34,6 +34,11 @@ require "settings/init.php";
     <p class="fs-1 poppins">Stats</p>
 </div>
 
+<!-- Opret Opgave -->
+<div>
+
+</div>
+
 <!-- Task Con -->
 <div class="container-fluid">
     <div class="row gap-5 justify-content-center">
@@ -42,7 +47,7 @@ require "settings/init.php";
             <label for="dailies" class="fs-5">Dailies</label>
             <div id="dailies" class="bg-white rounded-4 p-2">
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between border border-light border-2 rounded-4 p-1">
                     <div class="check-bg bg-primary rounded-4">
                         <div class="check-box rounded-4"></div>
                     </div>
@@ -70,7 +75,7 @@ require "settings/init.php";
             <label for="To-Do" class="fs-5">To-Do</label>
             <div id="To-Do" class="bg-white rounded-4 p-2">
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between border border-light border-2 rounded-4 p-1">
                     <div class="check-bg bg-secondary rounded-4">
                         <div class="check-box rounded-4"></div>
                     </div>
@@ -98,7 +103,7 @@ require "settings/init.php";
             <label for="habits" class="fs-5">Habits</label>
             <div id="habits" class="bg-white rounded-4 p-2">
 
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between border border-light border-2 rounded-4 p-1">
                     <div class="check-bg bg-info rounded-4">
                         <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">+</span></div>
                     </div>

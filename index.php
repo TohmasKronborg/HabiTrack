@@ -48,7 +48,7 @@ require "settings/init.php";
                     </div>
 
                     <div>
-                        <p class="m-0 fs-2 fw-bold">
+                        <p class="m-0 fs-3 fw-bold">
                             Daily name
                         </p>
                         <p class="m-0">
@@ -56,31 +56,11 @@ require "settings/init.php";
                         </p>
                     </div>
 
-                    <p class="fs-1 mt-auto mb-auto">X</p>
-                </div>
-
-            </div>
-        </div>
-        <!-- Habits -->
-        <div class="col-12 col-md-3">
-            <label for="habits" class="fs-5">Habits</label>
-            <div id="habits" class="bg-white rounded-4 p-2">
-
-                <div class="d-flex justify-content-between">
-                    <div class="check-bg bg-primary rounded-4">
-                        <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">+</span></div>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                        </svg>
                     </div>
-
-                    <div>
-                        <p class="m-0 fs-2 fw-bold">
-                            Daily name
-                        </p>
-                        <p class="m-0">
-                            Daily desc
-                        </p>
-                    </div>
-
-                    <p class="fs-1 mt-auto mb-auto">X</p>
                 </div>
 
             </div>
@@ -91,20 +71,56 @@ require "settings/init.php";
             <div id="To-Do" class="bg-white rounded-4 p-2">
 
                 <div class="d-flex justify-content-between">
-                    <div class="check-bg bg-primary rounded-4">
+                    <div class="check-bg bg-secondary rounded-4">
                         <div class="check-box rounded-4"></div>
                     </div>
 
                     <div>
-                        <p class="m-0 fs-2 fw-bold">
-                            Daily name
+                        <p class="m-0 fs-3 fw-bold">
+                            To-Do name
                         </p>
                         <p class="m-0">
-                            Daily desc
+                            To-Do desc
                         </p>
                     </div>
 
-                    <p class="fs-1 mt-auto mb-auto">X</p>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                        </svg>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Habits -->
+        <div class="col-12 col-md-3">
+            <label for="habits" class="fs-5">Habits</label>
+            <div id="habits" class="bg-white rounded-4 p-2">
+
+                <div class="d-flex justify-content-between">
+                    <div class="check-bg bg-info rounded-4">
+                        <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">+</span></div>
+                    </div>
+
+                    <div>
+                        <p class="m-0 fs-3 fw-bold">
+                            Habit Name
+                        </p>
+                        <p class="m-0">
+                            Habit Desc
+                        </p>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                        </svg>
+                    </div>
+
+                    <div class="check-bg bg-info rounded-4">
+                        <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">-</span></div>
+                    </div>
 
                 </div>
             </div>

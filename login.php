@@ -5,8 +5,34 @@
 
 require "settings/init.php";
 
+// Definere variabler til at holde på resultaterne
+$resultMessage = '';
 
+if (!empty($_POST["data"])) {
+    $data = $_POST["data"];
+    $inputname = trim($data["name"]);
 
+    // Query for brugeren
+    $sql = "SELECT name, keyword FROM users WHERE name = :name";
+    $bind = [":name" => $inputname];
+    $stmt = $db->sql($sql, $bind, false);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $inputkeyword = trim($data["keyword"]);
+        $storedHash = trim($user["keyword"]);
+
+        if ($inputkeyword === $storedHash) {
+            // Redirect to forside.php on successful login
+            header("Location: index.php");
+            exit(); // Stopper koden efter redirect
+        } else {
+            $resultMessage = "Forkert keyword";
+        }
+    } else {
+        $resultMessage = "Brugernavn ikke fundet";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="da">

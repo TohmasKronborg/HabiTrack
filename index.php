@@ -5,16 +5,16 @@
 
 require "settings/init.php";
 
-session_start();
-if (!isset($_SESSION['userId'])) {
+session_start(); // make sure the session is started
+
+if (empty($_SESSION['userId'])) {
     header("Location: login.php");
     exit();
 }
-$username = $_SESSION['username'];
 
-if (!empty($_POST["data"])) {
-    exit;
-}
+$userId = $_SESSION['userId'];
+$user = $db->sql("SELECT name FROM users WHERE userId = :userId", [":userId" => $userId]);
+$username = $user[0]->name;
 
 ?>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ if (!empty($_POST["data"])) {
         🗿HabiTrak🗿
     </h1>
     <h3 class="text-center text-white fw-normal">
-        Velkommen tilbage <strong class="text-white"> <?php echo $username?> </strong>
+        Velkommen <strong class="text-white"> <?php echo $username?> </strong>
     </h3>
 </header>
 
@@ -53,7 +53,7 @@ if (!empty($_POST["data"])) {
 <!-- Button trigger modal -->
 <div class="d-flex justify-content-center">
     <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
+        Lav en opgave
     </button>
 </div>
 
@@ -62,11 +62,11 @@ if (!empty($_POST["data"])) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Lav en opgave</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ...
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -76,7 +76,7 @@ if (!empty($_POST["data"])) {
     </div>
 </div>
 
-<!-- Task Con -->
+<!-- Example Task Con -->
 <div class="container-fluid">
     <div class="row gap-5 justify-content-center">
         <!-- Dailies -->

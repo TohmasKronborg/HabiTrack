@@ -22,7 +22,7 @@ if (!empty($_POST["data"])) {
     if ($user && password_verify($inputkeyword, $user["keyword"])) {
         $_SESSION['userId'] = $user["userId"];
         $_SESSION['username'] = $user["name"];
-        header("Location: index.php?id=" . urlencode($user['userId']));
+        header("Location: index.php?=" . ($user['name']));
         exit();
     } else {
         $resultMessage = "Ugyldigt login";

@@ -6,6 +6,7 @@
 
 require "settings/init.php";
 
+session_start();
 $resultMessage = '';
 
 if (!empty($_POST["data"])) {
@@ -13,14 +14,15 @@ if (!empty($_POST["data"])) {
     $inputname = trim($data["name"]);
     $inputkeyword = trim($data["keyword"]);
 
-    $sql = "SELECT name, keyword FROM users WHERE name = :name";
+    $sql = "SELECT userId, name, keyword FROM users WHERE name = :name";
     $bind = [":name" => $inputname];
     $stmt = $db->sql($sql, $bind, false);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($inputkeyword, $user["keyword"])) {
-        $_SESSION['user'] = $user["name"];
-        header("Location: index.php");
+        $_SESSION['userId'] = $user["userId"];
+        $_SESSION['username'] = $user["name"];
+        header("Location: index.php?id=" . urlencode($user['userId']));
         exit();
     } else {
         $resultMessage = "Ugyldigt login";

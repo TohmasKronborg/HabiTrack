@@ -5,7 +5,16 @@
 
 require "settings/init.php";
 
+session_start();
+if (!isset($_SESSION['userId'])) {
+    header("Location: login.php");
+    exit();
+}
+$username = $_SESSION['username'];
 
+if (!empty($_POST["data"])) {
+    exit;
+}
 
 ?>
 <!DOCTYPE html>
@@ -26,10 +35,13 @@ require "settings/init.php";
 
 <body class="bg-light">
 
-<header class="bg-primary">
-    <h1 class="poppins text-center text-white p-3">
+<header class="bg-primary p-3">
+    <h1 class="poppins text-center text-white mb-1">
         🗿HabiTrak🗿
     </h1>
+    <h3 class="text-center text-white fw-normal">
+        Velkommen tilbage <strong class="text-white"> <?php echo $username?> </strong>
+    </h3>
 </header>
 
 <!-- Stats div -->

@@ -52,7 +52,7 @@ if (!empty($_POST["data"])) {
 <header class="bg-primary">
     <h1 class="poppins text-center text-white p-3">🗿HabiTrak🗿</h1>
 </header>
-<div class="container">
+<div class="container w-25">
     <div class="row">
         <div class="col d-flex justify-content-center m-3">
             <p class="h2">Registrér ny konto</p>

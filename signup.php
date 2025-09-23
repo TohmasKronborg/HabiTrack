@@ -6,18 +6,11 @@
 require "settings/init.php";
 
 $message = '';
-
 if (!empty($_POST["data"])) {
     $data = $_POST["data"];
 
-    $randomName = ["Gandalf", "John Doe", "Jane Doe", "Frodo", "Aragorn", "Sam"];
-
-    if (empty($data["name"])) {
-        $data["name"] = $randomName[array_rand($randomName)];
-    }
-
-    if (empty($data["keyword"])) {
-        $message = "Keyword is required!";
+    if (empty($data["keyword"]) || empty($data["name"])) {
+        $message = "Keyword and Name are required!";
     } else {
         $sql = "INSERT INTO users (keyword, name) VALUES (:keyword, :name)";
         $bind = [
@@ -38,9 +31,12 @@ if (!empty($_POST["data"])) {
             }
         }
     }
-} elseif (isset($_GET['success']) && isset($_GET['name'])) {
-    $message = "User registered successfully with name: " . htmlspecialchars($_GET['name']);
+
+} elseif (isset($_GET['success'])) {
+    header("Location: login.php?success=1");
+    exit;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="da">
@@ -68,7 +64,7 @@ if (!empty($_POST["data"])) {
             <form action="" method="post">
                 <div class="mb-3">
                     <label for="name" class="form-label">Navn</label>
-                    <input type="text" class="form-control shadow-sm" id="name" name="data[name]" maxlength="50" placeholder="Valgfrit">
+                    <input type="text" class="form-control shadow-sm" id="name" name="data[name]" maxlength="50" placeholder="Skal udfyldes">
                 </div>
                 <div class="mb-3">
                     <label for="keyword" class="form-label">Keyword</label>

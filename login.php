@@ -43,6 +43,10 @@ require "settings/init.php";
         <div class="col d-flex justify-content-center m-3 mt-0 p-3 rounded-4 flex-column">
             <form action="login.php" method="POST">
                 <div class="mb-3">
+                    <label for="name" class="form-label">Navn</label>
+                    <input type="text" class="form-control shadow-sm" id="name" name="data[name]" maxlength="50">
+                </div>
+                <div class="mb-3">
                     <label for="keyword" class="form-label">keyword</label>
                     <input type="password" class="form-control shadow-sm" id="keyword" aria-describedby="keyword" name="data[keyword]">
                 </div>
@@ -54,7 +58,7 @@ require "settings/init.php";
             <?php endif; ?>
 
             <p class="mt-5 justify-content-center d-flex">Har du intet keyword? <br></p>
-            <a class="d-flex mt-0 mb-3 justify-content-center" href="signin.php">Klik her for at lave et keyword!</a>
+            <a class="d-flex mt-0 mb-3 justify-content-center" href="signup.php">Klik her for at lave et keyword!</a>
         </div>
     </div>
 </div>

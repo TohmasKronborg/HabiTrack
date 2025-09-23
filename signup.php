@@ -6,38 +6,40 @@
 require "settings/init.php";
 
 $message = '';
+
 if (!empty($_POST["data"])) {
     $data = $_POST["data"];
 
     if (empty($data["keyword"]) || empty($data["name"])) {
         $message = "Keyword and Name are required!";
     } else {
-        $sql = "INSERT INTO users (keyword, name) VALUES (:keyword, :name)";
+        // Hash keyword/password før det gemmes
+        $hashedKeyword = password_hash($data["keyword"], PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO users (name, keyword) VALUES (:name, :keyword)";
         $bind = [
             ":name" => $data["name"],
-            ":keyword" => $data["keyword"]
+            ":keyword" => $hashedKeyword
         ];
 
         try {
             $db->sql($sql, $bind, false);
-            // Redirect after successful insert to prevent duplicate insertion on reload
-            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1&name=" . urlencode($data["name"]));
+
+            // Redirect for at undgå genindsendelse
+            header("Location: login.php?success=1");
             exit;
         } catch (PDOException $e) {
             if ($e->getCode() == 23000) {
-                $message = "Fejl: Dette keyword er allerede brugt. Vælg et andet.";
+                // Sørg for at "name" er UNIQUE i databasen
+                $message = "Fejl: Brugernavnet er allerede i brug. Vælg et andet.";
             } else {
                 $message = "Fejl: Der opstod en fejl under registreringen. Prøv igen.";
             }
         }
     }
-
-} elseif (isset($_GET['success'])) {
-    header("Location: login.php?success=1");
-    exit;
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="da">
 <head>

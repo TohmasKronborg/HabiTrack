@@ -81,15 +81,15 @@ $username = $user[0]->name;
     <div class="row gap-5 justify-content-center">
         <!-- Dailies -->
         <div class="col-12 col-md-3">
-            <label for="dailies" class="fs-5">Dailies</label>
+            <label for="dailies" class="fs-5">Daglige</label>
             <div id="dailies" class="bg-white rounded-4 p-2">
 
-                <div class="d-flex justify-content-between border border-light border-2 rounded-4 p-1">
+                <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
                     <div class="check-bg bg-primary rounded-4">
                         <div class="check-box rounded-4"></div>
                     </div>
 
-                    <div>
+                    <div class="ms-3">
                         <p class="m-0 fs-3 fw-bold">
                             Daily name
                         </p>
@@ -98,7 +98,7 @@ $username = $user[0]->name;
                         </p>
                     </div>
 
-                    <div class="d-flex justify-content-center align-items-center">
+                    <div class="align-self-center ms-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                             <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                         </svg>
@@ -112,12 +112,12 @@ $username = $user[0]->name;
             <label for="To-Do" class="fs-5">To-Do</label>
             <div id="To-Do" class="bg-white rounded-4 p-2">
 
-                <div class="d-flex justify-content-between border border-light border-2 rounded-4 p-1">
+                <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
                     <div class="check-bg bg-secondary rounded-4">
                         <div class="check-box rounded-4"></div>
                     </div>
 
-                    <div>
+                    <div class="ms-3">
                         <p class="m-0 fs-3 fw-bold">
                             To-Do name
                         </p>
@@ -126,26 +126,26 @@ $username = $user[0]->name;
                         </p>
                     </div>
 
-                    <div class="d-flex justify-content-center align-items-center">
+                    <div class="ms-auto align-self-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                             <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                         </svg>
                     </div>
-
                 </div>
+
             </div>
         </div>
         <!-- Habits -->
         <div class="col-12 col-md-3">
-            <label for="habits" class="fs-5">Habits</label>
+            <label for="habits" class="fs-5">Vaner</label>
             <div id="habits" class="bg-white rounded-4 p-2">
 
-                <div class="d-flex justify-content-between border border-light border-2 rounded-4 p-1">
+                <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
                     <div class="check-bg bg-info rounded-4">
                         <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">+</span></div>
                     </div>
 
-                    <div>
+                    <div class="ms-3">
                         <p class="m-0 fs-3 fw-bold">
                             Habit Name
                         </p>
@@ -154,17 +154,19 @@ $username = $user[0]->name;
                         </p>
                     </div>
 
-                    <div class="d-flex justify-content-center align-items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                        </svg>
-                    </div>
+                    <div class="d-flex ms-auto">
+                        <div class="align-self-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                            </svg>
+                        </div>
 
-                    <div class="check-bg bg-info rounded-4">
-                        <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">-</span></div>
+                        <div class="check-bg bg-light rounded-4">
+                            <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">-</span></div>
+                        </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
     </div>

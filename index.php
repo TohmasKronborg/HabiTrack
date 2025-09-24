@@ -13,23 +13,30 @@ if (empty($_SESSION['userId'])) {
 }
 
 $userId = $_SESSION['userId'];
+
+// Fetch the user's name
 $user = $db->sql("SELECT name FROM users WHERE userId = :userId", [":userId" => $userId]);
 $username = $user[0]->name;
 
+// Handle form submission
 if (!empty($_POST["data"])) {
     $data = $_POST['data'];
 
-    $sql = "INSERT INTO tasks (taskUserId, title, description, type) 
-            VALUES (:taskUserId, :title, :description, :type)";
+    // Insert a new task/habit into the database
+    $sql = "INSERT INTO tasks (taskUserId, title, description, type, habitType) 
+            VALUES (:taskUserId, :title, :description, :type, :habitType)";
 
     $bind = [
-        ":taskUserId"   => $userId,  // comes from session
-        ":title"        => $data["title"],
-        ":description"  => $data["description"],
-        ":type"         => $data["type"]
+        ":taskUserId" => $userId,          // comes from session
+        ":title"      => $data["title"],   // habit/task title
+        ":description"=> $data["description"], // habit/task description
+        ":type"       => $data["type"],    // "todo" or "habit"
+        ":habitType"  => $data["habitType"] // "positive" or "negative" (for habits)
     ];
 
     $db->sql($sql, $bind, false);
+
+    // Redirect to avoid resubmission
     header("Location: index.php");
     exit;
 }
@@ -101,6 +108,15 @@ if (!empty($_POST["data"])) {
                         <option value="todo">To-Do</option>
                         <option value="habit">vane</option>
                     </select>
+
+                    <div id="habitTypeHidden" class="d-none">
+                        <label for="habitType" class="form-label mt-2">Opgave Type</label>
+                        <select name="data[habitType]" id="habitType" class="form-select" required>
+                            <option value="">--Positiv eller Negativ--</option>
+                            <option value="1">Positiv</option>
+                            <option value="0">Negativ</option>
+                        </select>
+                    </div>
 
                 </div>
 
@@ -194,31 +210,24 @@ if (!empty($_POST["data"])) {
                 <?php
                 $habits = $db->sql('SELECT * FROM tasks WHERE type = "habit" AND taskUserId = :userId', [":userId" => $userId]);
                 foreach ($habits as $habit) {
+                    $isPositive = ($habit->habitType == '1'); // check habit type
                 ?>
                 <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
-                    <div class="check-bg bg-info rounded-4">
-                        <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">+</span></div>
+                    <div class="check-bg <?= $isPositive ? 'bg-success' : 'bg-danger' ?> rounded-4">
+                        <div class="check-box rounded-4 d-flex justify-content-center align-items-center">
+                            <span class="fs-1 text-center"><?= $isPositive ? '+' : '-' ?></span>
+                        </div>
                     </div>
 
                     <div class="ms-3">
-                        <?php
-                        echo "<p class='m-0 fs-3 fw-bold'>" . $habit->title . "</p>";
-                        ?>
-                        <?php
-                        echo "<p class='m-0'>" . $habit->description . "</p>";
-                        ?>
+                        <?php echo "<p class='m-0 fs-3 fw-bold'>" . $habit->title . "</p>" ?>
+                        <?php echo "<p class='m-0'>" . $habit->description . "</p>" ?>
                     </div>
 
-                    <div class="d-flex ms-auto">
-                        <div class="align-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                            </svg>
-                        </div>
-
-                        <div class="check-bg bg-light rounded-4">
-                            <div class="check-box rounded-4 d-flex justify-content-center align-items-center"><span class="fs-1 text-center">-</span></div>
-                        </div>
+                    <div class="align-self-center ms-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                        </svg>
                     </div>
                 </div>
                 <?php
@@ -233,6 +242,21 @@ if (!empty($_POST["data"])) {
     <a href="logout.php">log ud</a>
 </div>
 
+<script>
+    const selectTaskType = document.querySelector("#type")
+    const habitTypeDiv = document.querySelector("#habitTypeHidden")
+    console.log(selectTaskType.value)
+
+    selectTaskType.addEventListener("input", () => {
+        if(selectTaskType.value === "habit") {
+            habitTypeDiv.classList.remove("d-none")
+            console.log(selectTaskType.value)
+        } else {
+            habitTypeDiv.classList.add("d-none")
+            console.log(selectTaskType.value)
+        }
+    })
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

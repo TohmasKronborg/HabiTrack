@@ -78,19 +78,19 @@ if (!empty($_POST["data"])) {
 <!-- Opret Opgave -->
 <!-- Button trigger modal -->
 <div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#taskModal">
         Lav en opgave
     </button>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="index.php" method="post">
 
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Lav en opgave</h1>
+                    <h1 class="modal-title fs-5" id="taskModalLabel">Lav en opgave</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -106,13 +106,13 @@ if (!empty($_POST["data"])) {
                         <option value="">--Vælg Type--</option>
                         <option value="daily">Daglig</option>
                         <option value="todo">To-Do</option>
-                        <option value="habit">vane</option>
+                        <option value="habit">Vane</option>
                     </select>
 
                     <div id="habitTypeHidden" class="d-none">
                         <label for="habitType" class="form-label mt-2">Opgave Type</label>
                         <select name="data[habitType]" id="habitType" class="form-select" required>
-                            <option value="">--Positiv eller Negativ--</option>
+                            <option value="0">--Positiv eller Negativ--</option>
                             <option value="1">Positiv</option>
                             <option value="0">Negativ</option>
                         </select>
@@ -132,7 +132,7 @@ if (!empty($_POST["data"])) {
 </div>
 
 
-<!-- Example Task Con -->
+<!-- Task Cons -->
 <div class="container-fluid">
     <div class="row gap-5 justify-content-center">
         <!-- Dailies -->
@@ -192,17 +192,18 @@ if (!empty($_POST["data"])) {
                         ?>
                     </div>
 
-                    <div class="ms-auto align-self-center">
+                    <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="ms-auto align-self-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                             <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                         </svg>
-                    </div>
+                    </a>
                 </div>
                 <?php
                     }
                 ?>
             </div>
         </div>
+        
         <!-- Habits -->
         <div class="col-12 col-md-3">
             <label for="habits" class="fs-5">Vaner</label>

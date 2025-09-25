@@ -93,12 +93,12 @@ $task = $task[0];
                 </select>
 
 
-                <div id="habitTypeHidden" class="<?php echo ($task->type === 'habit') ? '' : 'd-none'; ?>">
+                <div id="habitTypeHidden" class="d-none">
                     <label for="habitType" class="form-label mt-2">Opgave Type</label>
                     <select name="data[habitType]" id="habitType" class="form-select" required>
-                        <option value="">--Positiv eller Negativ--</option>
+                        <option value="0">--Positiv eller Negativ--</option>
                         <option value="1" <?php echo ($task->habitType == '1') ? 'selected' : ''; ?>>Positiv</option>
-                        <option value="-1" <?php echo ($task->habitType == '-1') ? 'selected' : ''; ?>>Negativ</option>
+                        <option value="0" <?php echo ($task->habitType == '0') ? 'selected' : ''; ?>>Negativ</option>
                     </select>
                 </div>
 

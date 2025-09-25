@@ -151,7 +151,7 @@ if (!empty($_POST["data"])) {
 
                         <div class="ms-3">
                             <?php
-                            echo "<p class='m-0 fs-3 fw-bold'>" . $daily->title . "</p>";
+                            echo "<p class='m-0 fs-5 fw-bold'>" . $daily->title . "</p>";
                             ?>
                             <?php
                             echo "<p class='m-0'>" . $daily->description . "</p>";
@@ -185,18 +185,31 @@ if (!empty($_POST["data"])) {
 
                     <div class="ms-3">
                         <?php
-                        echo "<p class='m-0 fs-3 fw-bold'>" . $todo->title . "</p>";
+                        echo "<p class='m-0 fs-5 fw-bold'>" . $todo->title . "</p>";
                         ?>
                         <?php
                         echo "<p class='m-0'>" . $todo->description . "</p>";
                         ?>
                     </div>
 
-                    <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="ms-auto align-self-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                        </svg>
-                    </a>
+
+                    <!-- Default dropup button -->
+                    <div class="btn-group dropstart ms-auto align-self-center">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu text-center fs-4 fw-bold">
+                            <li>
+                                <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="">Rediger</a>
+                            </li>
+                            <li>
+                                <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="">Slet</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <?php
                     }
@@ -221,7 +234,7 @@ if (!empty($_POST["data"])) {
                     </div>
 
                     <div class="ms-3">
-                        <?php echo "<p class='m-0 fs-3 fw-bold'>" . $habit->title . "</p>" ?>
+                        <?php echo "<p class='m-0 fs-5 fw-bold'>" . $habit->title . "</p>" ?>
                         <?php echo "<p class='m-0'>" . $habit->description . "</p>" ?>
                     </div>
 

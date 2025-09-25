@@ -158,11 +158,11 @@ if (!empty($_POST["data"])) {
                             ?>
                         </div>
 
-                        <div class="ms-auto align-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <a href="updateTask.php?taskId=<?php echo $daily->taskId?>" class="ms-auto align-self-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                                 <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                             </svg>
-                        </div>
+                        </a>
                     </div>
                     <?php
                 }
@@ -193,7 +193,7 @@ if (!empty($_POST["data"])) {
                     </div>
 
                     <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="ms-auto align-self-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                             <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                         </svg>
                     </a>
@@ -225,11 +225,11 @@ if (!empty($_POST["data"])) {
                         <?php echo "<p class='m-0'>" . $habit->description . "</p>" ?>
                     </div>
 
-                    <div class="align-self-center ms-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                    <a href="updateTask.php?taskId=<?php echo $habit->taskId?>" class="ms-auto align-self-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
                             <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                         </svg>
-                    </div>
+                    </a>
                 </div>
                 <?php
                     }

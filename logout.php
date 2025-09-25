@@ -36,6 +36,6 @@ exit();
     <title>Document</title>
 </head>
 <body>
-<img src="favicon2.jpg" alt="">
+<!--<img src="favicon2.jpg" alt="">-->
 </body>
 </html>

@@ -41,6 +41,12 @@ if (!empty($_POST["data"])) {
     exit;
 }
 
+if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"])) {
+    $db->sql("DELETE FROM tasks WHERE taskId = :taskId", [":taskId" => $_GET["taskId"]]);
+    header("Location: index.php");
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="da">
@@ -57,6 +63,11 @@ if (!empty($_POST["data"])) {
     <link rel="icon" href="favicon2.jpg">
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .dropdown-toggle::before{
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -158,11 +169,22 @@ if (!empty($_POST["data"])) {
                             ?>
                         </div>
 
-                        <a href="updateTask.php?taskId=<?php echo $daily->taskId?>" class="ms-auto align-self-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                            </svg>
-                        </a>
+                        <div class="btn-group dropstart ms-auto align-self-center">
+                            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                    <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu text-center fs-4 fw-bold">
+                                <li>
+                                    <a href="updateTask.php?taskId=<?php echo $daily->taskId?>" class="dropdown-item">Rediger Opgave</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="index.php?delete=1&taskId=<?php echo $daily->taskId?>">Slet Opgave</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     </div>
                     <?php
                 }
@@ -202,10 +224,10 @@ if (!empty($_POST["data"])) {
                         </button>
                         <ul class="dropdown-menu text-center fs-4 fw-bold">
                             <li>
-                                <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="">Rediger</a>
+                                <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="dropdown-item">Rediger Opgave</a>
                             </li>
                             <li>
-                                <a href="updateTask.php?taskId=<?php echo $todo->taskId?>" class="">Slet</a>
+                                <a class="dropdown-item" href="index.php?delete=1&taskId=<?php echo $todo->taskId?>">Slet Opgave</a>
                             </li>
                         </ul>
                     </div>
@@ -238,11 +260,22 @@ if (!empty($_POST["data"])) {
                         <?php echo "<p class='m-0'>" . $habit->description . "</p>" ?>
                     </div>
 
-                    <a href="updateTask.php?taskId=<?php echo $habit->taskId?>" class="ms-auto align-self-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                        </svg>
-                    </a>
+                    <div class="btn-group dropstart ms-auto align-self-center">
+                        <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                            </svg>
+                        </button>
+                        <ul class="dropdown-menu text-center fs-4 fw-bold">
+                            <li>
+                                <a href="updateTask.php?taskId=<?php echo $habit->taskId?>" class="dropdown-item">Rediger Opgave</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="index.php?delete=1&taskId=<?php echo $habit->taskId?>">Slet Opgave</a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <?php
                     }
@@ -252,7 +285,7 @@ if (!empty($_POST["data"])) {
     </div>
 </div>
 
-<div class="text-center mt-5">
+<div class="text-center mt-5 fw-bolder">
     <a href="logout.php">log ud</a>
 </div>
 

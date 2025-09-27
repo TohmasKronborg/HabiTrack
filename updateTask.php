@@ -112,8 +112,9 @@ $task = $task[0];
                 </div>
 
 
-                <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column align-items-center justify-content-center">
                     <button type="submit" class="btn btn-primary w-75 mt-5 text-white">Update task</button>
+                    <a href="index.php" class="mt-3">Tilbage</a>
                 </div>
 
             </div>

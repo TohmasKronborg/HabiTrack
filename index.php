@@ -5,7 +5,7 @@
 
 require "settings/init.php";
 
-session_start(); // make sure the session is started
+session_start();
 
 if (empty($_SESSION['userId'])) {
     header("Location: login.php");
@@ -14,29 +14,28 @@ if (empty($_SESSION['userId'])) {
 
 $userId = $_SESSION['userId'];
 
-// Fetch the user's name
 $user = $db->sql("SELECT name FROM users WHERE userId = :userId", [":userId" => $userId]);
 $username = $user[0]->name;
 
-// Handle form submission
+$point = $db->sql("SELECT points FROM users WHERE userId = :userId", [":userId" => $userId]);
+$userPoints = $point[0]->points;
+
 if (!empty($_POST["data"])) {
     $data = $_POST['data'];
 
-    // Insert a new task/habit into the database
     $sql = "INSERT INTO tasks (taskUserId, title, description, type, habitType) 
             VALUES (:taskUserId, :title, :description, :type, :habitType)";
 
     $bind = [
-        ":taskUserId" => $userId,          // comes from session
-        ":title"      => $data["title"],   // habit/task title
-        ":description"=> $data["description"], // habit/task description
-        ":type"       => $data["type"],    // "todo" or "habit"
-        ":habitType"  => $data["habitType"] // "positive" or "negative" (for habits)
+        ":taskUserId" => $userId,
+        ":title"      => $data["title"],
+        ":description"=> $data["description"],
+        ":type"       => $data["type"],
+        ":habitType"  => $data["habitType"]
     ];
 
     $db->sql($sql, $bind, false);
 
-    // Redirect to avoid resubmission
     header("Location: index.php");
     exit;
 }
@@ -46,6 +45,31 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
     header("Location: index.php");
     exit;
 }
+
+if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
+    $taskId = (int) $_GET['taskId'];
+    $status = $_GET['status']; // "pending" eller "done"
+
+    // Opdater task status
+    $db->sql("UPDATE tasks SET status = :status WHERE taskId = :taskId AND taskUserId = :userId", [
+        ":status" => $status,
+        ":taskId" => $taskId,
+        ":userId" => $userId
+    ]);
+
+    // Tilføj point hvis opgaven markeres som done
+    if ($status === 'done') {
+        $pointsToAdd = 5; // fast værdi, kan ændres
+        $db->sql("UPDATE users SET points = points + :points WHERE userId = :userId", [
+            ":points" => $pointsToAdd,
+            ":userId" => $userId
+        ]);
+    }
+
+    header("Location: index.php");
+    exit;
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -79,6 +103,9 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
     <h3 class="text-center text-white fw-normal">
         Velkommen <strong class="text-white"> <?php echo $username?> </strong>
     </h3>
+    <h4 class="text-center text-white fw-normal">
+        Du har <strong class="text-white"><?php echo $userPoints ?></strong> point
+    </h4>
 </header>
 
 <!-- Stats div -->
@@ -205,8 +232,13 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
                 ?>
                 <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
                     <div class="check-bg bg-secondary rounded-4">
-                        <div class="check-box rounded-4"></div>
+                        <a href="index.php?updateStatus=1&taskId=<?php echo $todo->taskId ?>&status=done">
+                            <div class="check-box rounded-4 d-flex align-items-center justify-content-center fw-bold fs-2">
+                                <?php echo ($todo->status === 'done') ? '✔' : ''; ?>
+                            </div>
+                        </a>
                     </div>
+
 
                     <div class="ms-3">
                         <?php

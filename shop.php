@@ -17,8 +17,6 @@ $userId = $_SESSION['userId'];
 // Fetch the user's name
 $user = $db->sql("SELECT name FROM users WHERE userId = :userId", [":userId" => $userId]);
 $username = $user[0]->name;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="da">

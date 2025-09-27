@@ -154,7 +154,7 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
             <div id="dailies" class="bg-white rounded-4 p-2">
 
                 <?php
-                $dailies = $db->sql('SELECT * FROM tasks WHERE type = "daily" AND taskUserId = :userId', [":userId" => $userId]);
+                $dailies = $db->sql('SELECT * FROM tasks WHERE type = "daily" AND status != "done" AND taskUserId = :userId', [":userId" => $userId]);
                 foreach ($dailies as $daily) {
                     ?>
                     <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
@@ -199,7 +199,7 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
             <label for="To-Do" class="fs-5">To-Do</label>
             <div id="To-Do" class="bg-white rounded-4 p-2">
                 <?php
-                $todos = $db->sql('SELECT * FROM tasks WHERE type = "todo" AND taskUserId = :userId', [":userId" => $userId]);
+                $todos = $db->sql('SELECT * FROM tasks WHERE type = "todo" AND status != "done" AND taskUserId = :userId', [":userId" => $userId]);
                 foreach ($todos as $todo) {
                 ?>
                 <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">

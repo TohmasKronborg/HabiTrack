@@ -124,22 +124,6 @@ $task = $task[0];
     </form>
 
 </div>
-
-<script>
-    const selectTaskType = document.querySelector("#type")
-    const habitTypeDiv = document.querySelector("#habitTypeHidden")
-    console.log(selectTaskType.value)
-
-    selectTaskType.addEventListener("input", () => {
-        if(selectTaskType.value === "habit") {
-            habitTypeDiv.classList.remove("d-none")
-            console.log(selectTaskType.value)
-        } else {
-            habitTypeDiv.classList.add("d-none")
-            console.log(selectTaskType.value)
-        }
-    })
-</script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

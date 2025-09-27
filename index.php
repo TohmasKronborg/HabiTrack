@@ -92,6 +92,8 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
     <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#taskModal">
         Lav en opgave
     </button>
+
+    <a href="completedTasks.php" class="btn btn-secondary ms-3">Færdige opgaver</a>
 </div>
 
 <!-- Modal -->

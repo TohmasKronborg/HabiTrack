@@ -2,6 +2,15 @@
 /** @var PDO $db */
 require "settings/init.php";
 
+session_start(); // make sure the session is started
+
+if (empty($_SESSION['userId'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$userId = $_SESSION['userId'];
+
 // Handle form submission (updating a task)
 if (!empty($_POST["taskId"]) && !empty($_POST["data"])) {
     $data = $_POST["data"];

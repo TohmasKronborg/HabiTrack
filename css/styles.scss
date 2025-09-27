@@ -25,7 +25,7 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 
 @import "bootstrapComponents";
 
-.dropdown-toggle::after{
+.dropdown-toggle::before{
 	display: none;
 }
 

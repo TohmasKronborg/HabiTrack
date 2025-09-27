@@ -68,7 +68,7 @@ $username = $user[0]->name;
                 foreach ($dailies as $daily) {
                     ?>
                     <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
-                        <div class="check-bg bg-primary rounded-4">
+                        <div class="check-bg bg-light rounded-4">
                             <div class="check-box rounded-4 d-flex align-items-center justify-content-center fw-bold fs-2">X</div>
                         </div>
 

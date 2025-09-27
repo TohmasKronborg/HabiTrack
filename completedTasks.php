@@ -51,7 +51,7 @@ $username = $user[0]->name;
     <p class="fs-1 poppins">Stats</p>
 </div>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mb-2">
        <a href="index.php" class="btn btn-secondary ms-3">Tilbage til dine opgaver</a>
 </div>
 

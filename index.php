@@ -86,9 +86,9 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
     <p class="fs-1 poppins">Stats</p>
 </div>
 
-<!-- Opret Opgave -->
+<!-- Knapper til diverse ting -->
 <!-- Button trigger modal -->
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mb-2">
     <button type="button" class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#taskModal">
         Lav en opgave
     </button>

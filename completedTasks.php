@@ -5,7 +5,7 @@
 
 require "settings/init.php";
 
-session_start(); // make sure the session is started
+session_start();
 
 if (empty($_SESSION['userId'])) {
     header("Location: login.php");
@@ -16,6 +16,23 @@ $userId = $_SESSION['userId'];
 
 $user = $db->sql("SELECT name FROM users WHERE userId = :userId", [":userId" => $userId]);
 $username = $user[0]->name;
+
+if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
+    $taskId = (int) $_GET['taskId'];
+    $status = $_GET['status']; // 'pending' eller 'done'
+
+    $db->sql(
+        "UPDATE tasks SET status = :status WHERE taskId = :taskId AND taskUserId = :userId",
+        [
+            ":status" => $status,
+            ":taskId" => $taskId,
+            ":userId" => $userId
+        ]
+    );
+
+    header("Location: completedTasks.php");
+    exit;
+}
 
 ?>
 <!DOCTYPE html>
@@ -91,6 +108,9 @@ $username = $user[0]->name;
                                 <li>
                                     <a class="dropdown-item" href="index.php?delete=1&taskId=<?php echo $daily->taskId?>">Slet Opgave</a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" href="completedTasks.php?updateStatus=1&taskId=<?php echo $daily->taskId?>&status=pending">Gendan opgave</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -134,6 +154,9 @@ $username = $user[0]->name;
                             <ul class="dropdown-menu text-center fs-4 fw-bold">
                                 <li>
                                     <a class="dropdown-item" href="index.php?delete=1&taskId=<?php echo $todo->taskId?>">Slet Opgave</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="completedTasks.php?updateStatus=1&taskId=<?php echo $todo->taskId?>&status=pending">Gendan opgave</a>
                                 </li>
                             </ul>
                         </div>

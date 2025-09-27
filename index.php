@@ -12,6 +12,7 @@ if (empty($_SESSION['userId'])) {
     exit();
 }
 
+// Henter bruger data
 $userId = $_SESSION['userId'];
 
 $user = $db->sql("SELECT name FROM users WHERE userId = :userId", [":userId" => $userId]);
@@ -20,6 +21,7 @@ $username = $user[0]->name;
 $point = $db->sql("SELECT points FROM users WHERE userId = :userId", [":userId" => $userId]);
 $userPoints = $point[0]->points;
 
+// Opretter en ny opgave
 if (!empty($_POST["data"])) {
     $data = $_POST['data'];
 
@@ -40,28 +42,46 @@ if (!empty($_POST["data"])) {
     exit;
 }
 
+// Sletter opgave
 if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"])) {
     $db->sql("DELETE FROM tasks WHERE taskId = :taskId", [":taskId" => $_GET["taskId"]]);
     header("Location: index.php");
     exit;
 }
 
+// Giver point når opgave er fuldført og ændre dens status til "done"
 if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
-    $taskId = (int) $_GET['taskId'];
-    $status = $_GET['status']; // "pending" eller "done"
+    $taskId = (int)$_GET['taskId'];
+    $status = $_GET['status'];
 
-    // Opdater task status
-    $db->sql("UPDATE tasks SET status = :status WHERE taskId = :taskId AND taskUserId = :userId", [
-        ":status" => $status,
+    $task = $db->sql("SELECT type, habitType FROM tasks WHERE taskId = :taskId AND taskUserId = :userId", [
         ":taskId" => $taskId,
         ":userId" => $userId
-    ]);
+    ])[0];
 
-    // Tilføj point hvis opgaven markeres som done
-    if ($status === 'done') {
-        $pointsToAdd = 5; // fast værdi, kan ændres
+    // Opdater status (kun for Daglige og To-Do)
+    if ($task->type !== 'habit') {
+        $db->sql("UPDATE tasks SET status = :status WHERE taskId = :taskId AND taskUserId = :userId", [
+            ":status" => $status,
+            ":taskId" => $taskId,
+            ":userId" => $userId
+        ]);
+    }
+
+    // Point logik
+    if ($task->type === 'habit') {
+        // Habit: positiv = +5, negativ = -5
+        $points = ($task->habitType == '1') ? 5 : -5;
+    } elseif ($status === 'done') {
+        // Daglig eller To-Do
+        $points = 5;
+    } else {
+        $points = 0;
+    }
+
+    if ($points !== 0) {
         $db->sql("UPDATE users SET points = points + :points WHERE userId = :userId", [
-            ":points" => $pointsToAdd,
+            ":points" => $points,
             ":userId" => $userId
         ]);
     }
@@ -69,6 +89,25 @@ if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
     header("Location: index.php");
     exit;
 }
+
+
+// Genstarter færdiggjort dailies efter en dag
+$dailies = $db->sql("SELECT * FROM tasks WHERE type='daily' AND taskUserId=:userId", [":userId"=>$userId]);
+
+foreach ($dailies as $daily) {
+    $lastReset = $daily->lastReset;
+    $today = date('Y-m-d');
+
+    if ($lastReset !== $today) {
+        // Reset status til pending
+        $db->sql("UPDATE tasks SET status='pending', lastReset=:today WHERE taskId=:taskId", [
+            ":today" => $today,
+            ":taskId" => $daily->taskId
+        ]);
+    }
+}
+
+
 
 
 ?>
@@ -187,7 +226,9 @@ if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
                     ?>
                     <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
                         <div class="check-bg bg-primary rounded-4">
-                            <div class="check-box rounded-4"></div>
+                            <a href="index.php?updateStatus=1&taskId=<?= $daily->taskId ?>&status=done">
+                                <div class="check-box rounded-4"></div>
+                            </a>
                         </div>
 
                         <div class="ms-3">
@@ -284,10 +325,12 @@ if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
                     $isPositive = ($habit->habitType == '1'); // check habit type
                 ?>
                 <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
-                    <div class="check-bg <?= $isPositive ? 'bg-success' : 'bg-danger' ?> rounded-4">
-                        <div class="check-box rounded-4 d-flex justify-content-center align-items-center">
-                            <span class="fs-1 text-center"><?= $isPositive ? '+' : '-' ?></span>
-                        </div>
+                    <div class="check-bg rounded-4 <?= $isPositive ? 'bg-success' : 'bg-danger' ?>">
+                        <a href="index.php?updateStatus=1&taskId=<?= $habit->taskId ?>&status=habit">
+                            <div class="check-box rounded-4 d-flex justify-content-center align-items-center">
+                                <span class="fs-1 text-center text-black"><?= $isPositive ? '+' : '-' ?></span>
+                            </div>
+                        </a>
                     </div>
 
                     <div class="ms-3">

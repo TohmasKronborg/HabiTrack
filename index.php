@@ -94,6 +94,7 @@ if(!empty($_GET["delete"]) && $_GET["delete"] == "1" && !empty($_GET["taskId"]))
     </button>
 
     <a href="completedTasks.php" class="btn btn-secondary ms-3">Færdige opgaver</a>
+    <a href="shop.php" class="btn btn-info ms-3">Til butik</a>
 </div>
 
 <!-- Modal -->

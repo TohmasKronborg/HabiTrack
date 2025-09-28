@@ -107,9 +107,6 @@ foreach ($dailies as $daily) {
     }
 }
 
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="da">
@@ -127,15 +124,24 @@ foreach ($dailies as $daily) {
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        .dropdown-toggle::before{
-            display: none;
+        :root {
+            --bs-primary: #d517bd;
+            --bs-secondary: #5c42e4;
+            --bs-info: #0fa0db;
+        }
+        .dynamic-primary {
+            background-color: #d517bd;
+        }
+
+        .dynamic-secondary {
+            background-color: #5c42e4;
         }
     </style>
 </head>
 
 <body class="bg-light">
 
-<header class="bg-primary p-3">
+<header class="dynamic-primary p-3">
     <h1 class="poppins text-center text-white mb-1">
         🗿HabiTrak🗿
     </h1>
@@ -159,8 +165,26 @@ foreach ($dailies as $daily) {
         Lav en opgave
     </button>
 
-    <a href="completedTasks.php" class="btn btn-secondary ms-3">Færdige opgaver</a>
-    <a href="shop.php" class="btn btn-info ms-3">Til butik</a>
+    <a href="completedTasks.php" class="btn btn-secondary ms-3  text-white">Færdige opgaver</a>
+    <a href="shop.php" class="btn btn-info ms-3  text-white">Til butik</a>
+</div>
+
+<!-- ColorPickers -->
+<div class="d-flex justify-content-center">
+    <div class="m-2 d-flex">
+        <label for="colorPickerC1" class="me-1 m-auto">Vælg farve 1</label>
+        <input type="color" id="colorPickerC1" value="#d517bd">
+    </div>
+
+    <div class="m-2 d-flex">
+        <label for="colorPickerC2" class="me-1 m-auto">Vælg farve 2</label>
+        <input type="color" id="colorPickerC2" value="#5c42e4">
+    </div>
+
+    <div class="m-2 d-flex">
+        <label for="colorPickerC3" class="me-1 m-auto">Vælg farve 3</label>
+        <input type="color" id="colorPickerC3" value="#0fa0db">
+    </div>
 </div>
 
 <!-- Modal -->
@@ -225,7 +249,7 @@ foreach ($dailies as $daily) {
                 foreach ($dailies as $daily) {
                     ?>
                     <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
-                        <div class="check-bg bg-primary rounded-4">
+                        <div class="check-bg dynamic-primary rounded-4">
                             <a href="index.php?updateStatus=1&taskId=<?= $daily->taskId ?>&status=done">
                                 <div class="check-box rounded-4"></div>
                             </a>
@@ -272,7 +296,7 @@ foreach ($dailies as $daily) {
                 foreach ($todos as $todo) {
                 ?>
                 <div class="d-flex border border-light border-2 rounded-4 p-1 m-2">
-                    <div class="check-bg bg-secondary rounded-4">
+                    <div class="check-bg dynamic-secondary rounded-4">
                         <a href="index.php?updateStatus=1&taskId=<?php echo $todo->taskId ?>&status=done">
                             <div class="check-box rounded-4 d-flex align-items-center justify-content-center fw-bold fs-2">
                                 <?php echo ($todo->status === 'done') ? '✔' : ''; ?>
@@ -382,6 +406,7 @@ foreach ($dailies as $daily) {
         }
     })
 </script>
+<script src="js/colorPicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

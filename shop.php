@@ -24,7 +24,6 @@ $userPoints = $user[0]->points;
 <html lang="da">
 <head>
     <meta charset="utf-8">
-
     <title>HabiTrak</title>
 
     <meta name="robots" content="All">
@@ -33,9 +32,7 @@ $userPoints = $user[0]->points;
 
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <link rel="icon" href="images/favicon2.jpg">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 </head>
 
 <body class="bg-light">
@@ -45,7 +42,7 @@ $userPoints = $user[0]->points;
         🗿HabiTrak🗿
     </h1>
     <h3 class="text-center text-white fw-normal">
-        Velkommen <strong class="text-white"> <?php echo $username?> </strong>
+        Velkommen <strong class="text-white"><?php echo $username?></strong>
     </h3>
     <h4 class="text-center text-white fw-normal">
         Du har <strong class="text-white"><?php echo $userPoints ?></strong> point
@@ -57,20 +54,20 @@ $userPoints = $user[0]->points;
 </div>
 
 <!-- Shop div -->
-<div class="m-4 mt-1 bg-white rounded-4 d-flex align-items-center justify-content-center" style="height: 135px /* temp height */">
-    <p class="fs-1 poppins mb-5">SHOP</p>
+<div class="m-4 mt-1 p-4 bg-white rounded-4 d-flex flex-column align-items-center justify-content-center">
+    <p class="fs-1 poppins mb-3">SHOP</p>
 
     <div class="card" style="width: 18rem;">
-        <img src="images/colorPicker.png" class="card-img-top" alt="color picker">
+        <img src="images/colorPicker.png" class="card-img-top img-fluid" alt="color picker">
         <div class="card-body">
             <h5 class="card-title">Color picker</h5>
             <p class="card-text">Med denne opgradering, kan du selv ændre farverne på hjemmesiden.</p>
-            <a href="#" class="btn btn-primary">Køb</a>
+            <a href="#" class="btn btn-primary text-white">Køb</a>
         </div>
     </div>
-
 </div>
 
+<script src="js/colorPicker.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

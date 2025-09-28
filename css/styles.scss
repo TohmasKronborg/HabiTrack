@@ -11,6 +11,27 @@ $light: #e7e7e8;
 $danger: #e03e5f;
 $success: #28c76f;
 
+:root {
+	--bs-primary: #{$primary};
+	--bs-secondary: #{$secondary};
+	--bs-info: #{$info};
+}
+
+// Map Bootstrap to use CSS variables
+.btn-primary {
+	background-color: var(--bs-primary);
+	border-color: var(--bs-primary);
+}
+
+.btn-secondary {
+	background-color: var(--bs-secondary);
+	border-color: var(--bs-secondary);
+}
+
+.alert-info {
+	background-color: var(--bs-info);
+	border-color: var(--bs-info);
+}
 
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../node_modules/bootstrap/scss/variables";

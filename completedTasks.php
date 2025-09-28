@@ -47,7 +47,7 @@ if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
     <meta name="copyright" content="Information om copyright">
 
     <link href="css/styles.css" rel="stylesheet" type="text/css">
-    <link rel="icon" href="favicon2.jpg">
+    <link rel="icon" href="images/favicon2.jpg">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>

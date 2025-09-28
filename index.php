@@ -124,11 +124,6 @@ foreach ($dailies as $daily) {
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        :root {
-            --bs-primary: #d517bd;
-            --bs-secondary: #5c42e4;
-            --bs-info: #0fa0db;
-        }
         .dynamic-primary {
             background-color: #d517bd;
         }

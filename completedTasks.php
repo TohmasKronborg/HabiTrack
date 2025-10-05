@@ -174,21 +174,6 @@ if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
     <a href="logout.php">log ud</a>
 </div>
 
-<script>
-    const selectTaskType = document.querySelector("#type")
-    const habitTypeDiv = document.querySelector("#habitTypeHidden")
-    console.log(selectTaskType.value)
-
-    selectTaskType.addEventListener("input", () => {
-        if(selectTaskType.value === "habit") {
-            habitTypeDiv.classList.remove("d-none")
-            console.log(selectTaskType.value)
-        } else {
-            habitTypeDiv.classList.add("d-none")
-            console.log(selectTaskType.value)
-        }
-    })
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

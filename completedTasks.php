@@ -17,23 +17,6 @@ $userId = $_SESSION['userId'];
 $user = $db->sql("SELECT name FROM users WHERE userId = :userId", [":userId" => $userId]);
 $username = $user[0]->name;
 
-if (isset($_GET['updateStatus'], $_GET['taskId'], $_GET['status'])) {
-    $taskId = (int) $_GET['taskId'];
-    $status = $_GET['status']; // 'pending' eller 'done'
-
-    $db->sql(
-        "UPDATE tasks SET status = :status WHERE taskId = :taskId AND taskUserId = :userId",
-        [
-            ":status" => $status,
-            ":taskId" => $taskId,
-            ":userId" => $userId
-        ]
-    );
-
-    header("Location: completedTasks.php");
-    exit;
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="da">

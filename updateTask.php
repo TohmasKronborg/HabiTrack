@@ -2,7 +2,7 @@
 /** @var PDO $db */
 require "settings/init.php";
 
-session_start(); // make sure the session is started
+session_start();
 
 if (empty($_SESSION['userId'])) {
     header("Location: login.php");
@@ -11,7 +11,7 @@ if (empty($_SESSION['userId'])) {
 
 $userId = $_SESSION['userId'];
 
-// Handle form submission (updating a task)
+
 if (!empty($_POST["taskId"]) && !empty($_POST["data"])) {
     $data = $_POST["data"];
 
@@ -26,12 +26,12 @@ if (!empty($_POST["taskId"]) && !empty($_POST["data"])) {
         ]
     );
 
-    // Redirect back after update
+
     header("Location: index.php?success=1&taskId=" . $_POST["taskId"]);
     exit;
 }
 
-// If no taskId is provided, return to admin
+
 if (empty($_GET["taskId"])) {
     header("Location: index.php");
     exit;
@@ -39,7 +39,7 @@ if (empty($_GET["taskId"])) {
 
 $taskId = $_GET["taskId"];
 
-// Fetch task from DB
+
 $task = $db->sql(
     "SELECT * FROM tasks WHERE taskId = :taskId",
     [":taskId" => $taskId]

@@ -5,7 +5,7 @@
 
 require "settings/init.php";
 
-session_start(); // make sure the session is started
+session_start();
 
 if (empty($_SESSION['userId'])) {
     header("Location: login.php");
@@ -14,7 +14,7 @@ if (empty($_SESSION['userId'])) {
 
 $userId = $_SESSION['userId'];
 
-// Fetch the user's name
+
 $user = $db->sql("SELECT name, points FROM users WHERE userId = :userId", [":userId" => $userId]);
 $username = $user[0]->name;
 $userPoints = $user[0]->points;

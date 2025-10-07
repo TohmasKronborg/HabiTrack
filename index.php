@@ -223,8 +223,6 @@ foreach ($dailies as $daily) {
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuller</button>
                     <button type="submit" class="btn btn-primary">Opret opgave</button>
                 </div>
-
-                <input type="hidden" name="questId" value="4">
             </form>
         </div>
     </div>

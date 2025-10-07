@@ -17,7 +17,7 @@ function loadColor(key, defaultColor) {
 // Buttons og alerts
 const btnPrimary = document.querySelectorAll('.btn-primary');
 const btnSecondary = document.querySelectorAll('.btn-secondary');
-const alertInfo = document.querySelectorAll('.alert-info');
+const alertInfo = document.querySelectorAll('.alert-info'); // Kunne laves om til btn-info
 
 // Vælg farver
 function applyPrimaryColor(color) {
@@ -32,7 +32,7 @@ function applySecondaryColor(color) {
     updateColor('.dynamic-secondary', 'color', 'white');
 }
 
-function applyAlertColor(color) {
+function applyAlertColor(color) { // Kunne havde hedet applyInfoColor i stedet for
     alertInfo.forEach(el => { el.style.backgroundColor = color; el.style.borderColor = color; });
     updateColor('.btn-info', 'backgroundColor', color);
     updateColor('.btn-info', 'color', 'black');
